@@ -1,0 +1,87 @@
+{% extends "layouts.master" %}
+
+{% block title %}{{ trans('cart') }} - {{ store.name }}{% endblock %}
+
+{% block content %}
+
+<section class="cart-page">
+    <div class="container">
+        <h1 class="page-title">{{ trans('cart') }}</h1>
+
+        <div class="cart-layout">
+            <div class="cart-items">
+                {% if cart.items %}
+                    {% for item in cart.items %}
+                    <div class="cart-item" data-item-id="{{ item.id }}">
+                        <div class="item-image">
+                            <img src="{{ item.image }}" alt="{{ item.name }}">
+                        </div>
+                        <div class="item-details">
+                            <h3 class="item-name">{{ item.name }}</h3>
+                            {% if item.options %}
+                            <p class="item-options">
+                                {% for option in item.options %}
+                                {{ option.name }}: {{ option.value }}{% if not loop.last %} - {% endif %}
+                                {% endfor %}
+                            </p>
+                            {% endif %}
+                            <div class="item-price">{{ item.price }}</div>
+                        </div>
+                        <div class="item-quantity">
+                            <button class="qty-btn qty-minus" data-item-id="{{ item.id }}">-</button>
+                            <input type="number" class="qty-input" value="{{ item.quantity }}" min="1" data-item-id="{{ item.id }}">
+                            <button class="qty-btn qty-plus" data-item-id="{{ item.id }}">+</button>
+                        </div>
+                        <div class="item-total">{{ item.total }}</div>
+                        <button class="item-remove" data-item-id="{{ item.id }}">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                            </svg>
+                        </button>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <div class="cart-empty">
+                    <p>{{ trans('cart_empty') }}</p>
+                    <a href="{{ store.products_url }}" class="btn btn-primary">{{ trans('continue_shopping') }}</a>
+                </div>
+                {% endif %}
+            </div>
+
+            {% if cart.items %}
+            <div class="cart-summary">
+                <h2>{{ trans('order_summary') }}</h2>
+                <div class="summary-row">
+                    <span>{{ trans('subtotal') }}</span>
+                    <span>{{ cart.subtotal }}</span>
+                </div>
+                {% if cart.discount %}
+                <div class="summary-row summary-discount">
+                    <span>{{ trans('discount') }}</span>
+                    <span>-{{ cart.discount }}</span>
+                </div>
+                {% endif %}
+                <div class="summary-row">
+                    <span>{{ trans('shipping') }}</span>
+                    <span>{{ cart.shipping }}</span>
+                </div>
+                <div class="summary-row summary-total">
+                    <span>{{ trans('total') }}</span>
+                    <span>{{ cart.total }}</span>
+                </div>
+
+                <div class="coupon-form">
+                    <input type="text" class="coupon-input" placeholder="{{ trans('coupon_code') }}">
+                    <button class="btn btn-secondary btn-coupon">{{ trans('apply_coupon') }}</button>
+                </div>
+
+                <a href="{{ cart.checkout_url }}" class="btn btn-primary btn-checkout">
+                    {{ trans('checkout') }}
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

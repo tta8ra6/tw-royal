@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{{ direction }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ store.name }}{% endblock %}</title>
+    <meta name="description" content="{{ store.description }}">
+    {% hook 'head:start' %}
+    <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+    {% hook 'head:end' %}
+</head>
+<body>
+    {% hook 'body:start' %}
+
+    <header class="site-header">
+        {% include 'components.header.main' %}
+    </header>
+
+    <main class="site-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        {% include 'components.footer.main' %}
+    </footer>
+
+    <script src="{{ asset('js/app.js') }}"></script>
+    {% hook 'body:end' %}
+</body>
+</html>

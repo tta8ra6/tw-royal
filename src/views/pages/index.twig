@@ -1,0 +1,30 @@
+{% extends "layouts.master" %}
+
+{% block title %}{{ store.name }} - الرئيسية{% endblock %}
+
+{% block content %}
+
+<section class="hero-banner">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">{{ trans('welcome_message') }}</h1>
+            <p class="hero-subtitle">{{ trans('welcome_subtitle') }}</p>
+            <a href="{{ store.products_url }}" class="btn btn-primary">{{ trans('shop_now') }}</a>
+        </div>
+    </div>
+</section>
+
+<section class="featured-products">
+    <div class="container">
+        <h2 class="section-title">{{ trans('featured_products') }}</h2>
+        <div class="products-grid">
+            {% for product in store.featured_products %}
+                {% include 'components.product.card' with {product: product} %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% component 'home' %}
+
+{% endblock %}

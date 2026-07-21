@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "theme_name": {
+    "ar": "بديعي",
+    "en": "Badie"
+  },
+  "description": {
+    "ar": "ثيم بسيط وأنيق لمتجرك الإلكتروني",
+    "en": "A simple and elegant theme for your online store"
+  },
+  "repository": "",
+  "support_url": "",
+  "author_email": "",
+  "settings": [
+    {
+      "type": "string",
+      "id": "placeholder",
+      "format": "hidden",
+      "value": "images/img_placeholder.png"
+    },
+    {
+      "type": "boolean",
+      "label": "شريط علوي داكن",
+      "id": "topnav_is_dark",
+      "format": "switch",
+      "selected": false
+    },
+    {
+      "type": "image",
+      "id": "logo",
+      "label": "شعار المتجر",
+      "format": "image"
+    }
+  ],
+  "features": [
+    "mega-menu",
+    "fonts",
+    "color",
+    "breadcrumb",
+    "component-featured-products",
+    "component-products-slider",
+    "component-testimonials",
+    "component-store-features",
+    "filters"
+  ],
+  "components": []
+}
